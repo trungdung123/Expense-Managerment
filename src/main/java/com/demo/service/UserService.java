@@ -44,7 +44,10 @@ public class UserService implements UserServiceImpl{
 		userInDB.setFull_name(user.getFull_name());
 		userInDB.setPassword(user.getPassword());
 		userInDB.setUsername(user.getUsername());
-		userInDB.setRole(user.getRole());
+		
+		Role role = roleService.getRoleByName(user.getRole().getName());
+		
+		userInDB.setRole(role);
 		
 		return userRepository.save(userInDB);
 	}
@@ -52,6 +55,11 @@ public class UserService implements UserServiceImpl{
 	@Override
 	public void deleteUser(User user) {
 		userRepository.delete(user);
+	}
+
+	@Override
+	public User GetUserByUsername(String username) {
+		return userRepository.findByUsername(username);
 	}
 
 }
