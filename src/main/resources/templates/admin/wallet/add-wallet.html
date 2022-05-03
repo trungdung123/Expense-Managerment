@@ -216,7 +216,44 @@
 
     <!-- Main content -->
     <section class="content">
-		chỉnh sửa vi
+		
+		<div class="card card-success">
+					<div class="card-header">
+						<h3 class="card-title">Add new Wallet</h3>
+					</div>
+					<!-- /.card-header -->
+					<!-- form start -->
+					<form th:action="@{/admin/wallets/add-wallet}" method="post"
+						th:object="${walletDTO}">
+						<div class="card-body">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Wallet Name</label> <input
+									type="text" class="form-control" name="name"
+									th:field="*{name}" placeholder="Enter wallet name">
+							</div>
+
+							<div class="form-group">
+								<label for="exampleInputEmail1">Balance</label> <input
+									type="number" class="form-control" name="balance"
+									th:field="*{balance}" placeholder="Enter balance">
+							</div>
+
+							<div class="form-group">
+								<label>User's</label> <select th:field="*{userDTO.username}"
+									class="form-control">
+									<option th:each="userDTO : ${userDTOs}" th:value="${userDTO.username}" th:text="${userDTO.username}"></option>
+								</select>
+							</div>
+
+						</div>
+						<!-- /.card-body -->
+
+						<div class="card-footer">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</form>
+				</div>
+		
     </section>
     <!-- /.content -->
   </div>

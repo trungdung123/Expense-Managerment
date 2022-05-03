@@ -10,6 +10,8 @@ public interface UserServiceImpl {
 	
 	User GetUserById(Long id);
 	
+	User GetUserByUsername(String username);
+	
 	User createUser(User user);
 	
 	User editUser (User user, Long id);

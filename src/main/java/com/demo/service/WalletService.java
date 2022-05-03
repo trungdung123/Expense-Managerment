@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.demo.models.User;
 import com.demo.models.Wallet;
 import com.demo.repository.WalletRepository;
 import com.demo.service.impl.WalletServiceImpl;
@@ -14,6 +15,9 @@ public class WalletService implements WalletServiceImpl{
 	
 	@Autowired
 	private WalletRepository walletRepository;
+	
+	@Autowired
+	private UserService userService;
 
 	@Override
 	public List<Wallet> getAllWallet() {
@@ -27,6 +31,11 @@ public class WalletService implements WalletServiceImpl{
 
 	@Override
 	public Wallet createWallet(Wallet wallet) {
+		
+		User user = userService.GetUserByUsername(wallet.getUser().getUsername());
+		
+		wallet.setUser(user);
+		
 		return walletRepository.save(wallet);
 	}
 
@@ -37,7 +46,10 @@ public class WalletService implements WalletServiceImpl{
 		
 		walletInDB.setBalance(wallet.getBalance());
 		walletInDB.setName(wallet.getName());
-		walletInDB.setUser(wallet.getUser());
+		
+		User user = userService.GetUserByUsername(wallet.getUser().getUsername());
+		
+		walletInDB.setUser(user);
 		
 		return walletRepository.save(walletInDB);
 		
