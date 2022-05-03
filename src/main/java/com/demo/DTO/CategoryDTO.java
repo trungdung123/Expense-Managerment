@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CategoryDTO {
 
-private Long id;
-	
+	private Long id;
+
 	private String name;
 
 	private CategoryTypeDTO typeDTO;
@@ -21,9 +21,9 @@ private Long id;
 		this.name = name;
 		this.typeDTO = typeDTO;
 	}
-	
-	public Category toModel () {
+
+	public Category toModel() {
 		return new Category(name, typeDTO.toModel());
 	}
-	
+
 }
