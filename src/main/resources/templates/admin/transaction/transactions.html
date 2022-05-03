@@ -147,13 +147,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a th:href="@{/admin/transactions}" class="nav-link">
+                <a th:href="@{/admin/categories}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Danh sách</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a th:href="@{/admin/transactions/add-transaction}" class="nav-link">
+                <a th:href="@{/admin/categories/add-category}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Thêm mới</p>
                 </a>
@@ -216,7 +216,59 @@
 
     <!-- Main content -->
     <section class="content">
-		danh sach giao dich
+		
+		<div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Danh sách giao dịch</h3>
+
+                                <div class="card-tools">
+                                    <a th:href="@{/admin/transactions/add-transaction}" class="btn btn-info">Thêm mới</a>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Người giao dịch</th>
+                                            <th>Ví giao dịch</th>
+                                            <th>Kiểu giao dịch</th>
+                                            <th>Loại giao dịch</th>
+                                            <th>Giá trị</th>
+                                            <th>Ngày giao dịch</th>
+                                            <th>Mô tả</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="transactionDTO : ${transactionDTOs}">
+                                            <td th:text="${transactionDTO.id}"></td>
+                                            <td th:text="${transactionDTO.userDTO.username}"></td>
+                                            <td th:text="${transactionDTO.walletDTO.name}"></td>
+                                            <td th:if="${transactionDTO.typeDTO.name} == 'TRANSACTION_IN'">Khoản thu</td>
+                                            <td th:unless="${transactionDTO.typeDTO.name} == 'TRANSACTION_IN'">Khoản chi</td>
+                                            <td th:text="${transactionDTO.categoryDTO.name}"></td>
+                                            <td th:text="${transactionDTO.value}"></td>
+                                            <td th:text="${transactionDTO.time}"></td>
+                                            <td th:text="${transactionDTO.description}"></td>
+                                        	<td>
+                                        		<a th:href="@{/admin/transactions/edit-transaction/{id}(id=${transactionDTO.id})}" class="btn btn-success">Chỉnh sửa</a>
+                                        		<a th:href="@{/admin/transactions/delete-transaction/{id}(id=${transactionDTO.id})}" class="btn btn-danger">Xóa</a>
+                                        	</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+		
     </section>
     <!-- /.content -->
   </div>

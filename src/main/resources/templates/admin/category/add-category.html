@@ -147,13 +147,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a th:href="@{/admin/transactions}" class="nav-link">
+                <a th:href="@{/admin/categories}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Danh sách</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a th:href="@{/admin/transactions/add-transaction}" class="nav-link">
+                <a th:href="@{/admin/categories/add-category}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Thêm mới</p>
                 </a>
@@ -216,7 +216,39 @@
 
     <!-- Main content -->
     <section class="content">
-		them moi khoan thu chi
+		
+		<div class="card card-success">
+					<div class="card-header">
+						<h3 class="card-title">Add new Category</h3>
+					</div>
+					<!-- /.card-header -->
+					<!-- form start -->
+					<form th:action="@{/admin/categories/add-category}" method="post"
+						th:object="${categoryDTO}">
+						<div class="card-body">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Category Name</label> <input
+									type="text" class="form-control" name="name"
+									th:field="*{name}" placeholder="Enter category name">
+							</div>
+
+							<div class="form-group">
+								<label>Category Type</label> <select th:field="*{typeDTO.name}"
+									class="form-control">
+									<option th:value="CATEGORY_IN">Khoản thu</option>
+									<option th:value="CATEGORY_OUT">Khoản chi</option>
+								</select>
+							</div>
+
+						</div>
+						<!-- /.card-body -->
+
+						<div class="card-footer">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</form>
+				</div>
+		
     </section>
     <!-- /.content -->
   </div>
