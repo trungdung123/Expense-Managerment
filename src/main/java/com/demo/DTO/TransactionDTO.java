@@ -2,6 +2,8 @@ package com.demo.DTO;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.demo.models.Transaction;
 
 import lombok.Data;
@@ -15,28 +17,28 @@ private Long id;
 	
 	private Double value;
 	private String description;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date time;
 
-	private TransactionTypeDTO typeDTO;
 	private UserDTO userDTO;
 	private WalletDTO walletDTO;
 	private CategoryDTO categoryDTO;
 	
-	public TransactionDTO(Long id, Double value, String description, Date time, TransactionTypeDTO typeDTO,
+	public TransactionDTO(Long id, Double value, String description, Date time,
 			UserDTO userDTO, WalletDTO walletDTO, CategoryDTO categoryDTO) {
 		super();
 		this.id = id;
 		this.value = value;
 		this.description = description;
 		this.time = time;
-		this.typeDTO = typeDTO;
 		this.userDTO = userDTO;
 		this.walletDTO = walletDTO;
 		this.categoryDTO = categoryDTO;
 	}
 	
 	public Transaction toModel () {
-		return new Transaction(value, description, time, typeDTO.toModel(), userDTO.toModel(), walletDTO.toModel(), categoryDTO.toModel());
+		return new Transaction(value, description, time, userDTO.toModel(), walletDTO.toModel(), categoryDTO.toModel());
 	}
 	
 }

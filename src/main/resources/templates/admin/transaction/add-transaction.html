@@ -33,6 +33,9 @@
 <!-- summernote -->
 <link rel="stylesheet"
 	href="/admin/plugins/summernote/summernote-bs4.min.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
@@ -213,64 +216,62 @@
 
 				<div class="card card-success">
 					<div class="card-header">
-						<h3 class="card-title">Add new User</h3>
+						<h3 class="card-title">Add new Transaction</h3>
 					</div>
 					<!-- /.card-header -->
 					<!-- form start -->
-					<form th:action="@{/admin/transactions/add-transaction}" method="post"
-						th:object="${transactionDTO}">
+					<form th:action="@{/admin/transactions/add-transaction}"
+						method="post" th:object="${transactionDTO}">
 						<div class="card-body">
-						
+
 							<div class="form-group">
 								<label>User's</label> <select th:field="*{userDTO.username}"
 									class="form-control">
-									<option th:each="userDTO : ${userDTOs}" th:value="${userDTO.username}" th:text="${userDTO.username}"></option>
+									<option th:each="userDTO : ${userDTOs}"
+										th:value="${userDTO.username}" th:text="${userDTO.username}"></option>
 								</select>
 							</div>
-							
+
 							<div class="form-group">
 								<label>Wallet</label> <select th:field="*{walletDTO.name}"
 									class="form-control">
-									<option th:each="walletDTO : ${walletDTOs}" th:value="${walletDTO.name}" th:text="${walletDTO.username}"></option>
+									<option th:each="walletDTO : ${walletDTOs}"
+										th:if="${walletDTO.userDTO.username} != *{userDTO.username}"
+										th:value="${walletDTO.name}" th:text="${walletDTO.name}"></option>
 								</select>
 							</div>
-						
-							<div class="form-group">
-								<label for="exampleInputEmail1">Username</label> <input
-									type="text" class="form-control" name="username"
-									th:field="*{username}" placeholder="Enter username">
-							</div>
 
 							<div class="form-group">
-								<label for="exampleInputEmail1">Password</label> <input
-									type="password" class="form-control" name="username"
-									th:field="*{password}" placeholder="Enter password">
-							</div>
-
-							<div class="form-group">
-								<label for="exampleInputEmail1">Email</label> <input
-									type="email" class="form-control" name="email"
-									th:field="*{email}" placeholder="Enter email">
-							</div>
-
-							<div class="form-group">
-								<label for="exampleInputEmail1">Full name</label> <input
-									type="text" class="form-control" name="full_name"
-									th:field="*{full_name}" placeholder="Enter Fullname">
-							</div>
-
-							<div class="form-group">
-								<label for="exampleInputEmail1">Phone</label> <input type="text"
-									class="form-control" name="phone" th:field="*{phone}"
-									placeholder="Enter username">
-							</div>
-
-							<div class="form-group">
-								<label>Role</label> <select th:field="*{role.name}"
+								<label>Category</label> <select th:field="*{categoryDTO.name}"
 									class="form-control">
-									<option th:value="ROLE_ADMIN" th:text="ADMIN"></option>
-									<option th:value="ROLE_USER" th:text="USER"></option>
+									<option th:each="categoryDTO : ${categoryDTOs}"
+										th:value="${categoryDTO.name}" th:text="${categoryDTO.name}"></option>
 								</select>
+							</div>
+
+							<div class="form-group">
+								<label for="exampleInputEmail1">Value</label> <input
+									type="number" class="form-control" name="value"
+									th:field="*{value}" placeholder="Enter value">
+							</div>
+
+							<div class="form-group">
+								<label for="exampleInputEmail1">Description</label> <input
+									type="text" class="form-control" name="description"
+									th:field="*{description}" placeholder="Enter description">
+							</div>
+
+							<div class="form-group">
+								<label>Transaction Date</label>
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i
+											class="far fa-calendar-alt"></i></span>
+									</div>
+									<input th:field="*{time}" type="date" class="form-control"
+										data-inputmask-alias="datetime"
+										data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+								</div>
 							</div>
 
 						</div>
@@ -337,6 +338,15 @@
 	<script src="/admin/dist/js/demo.js"></script>
 	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 	<script src="/admin/dist/js/pages/dashboard.js"></script>
+	
+	<script type="text/javascript">
+			//Datemask dd/mm/yyyy
+			$('#datemask').inputmask('dd/mm/yyyy', {
+				'placeholder' : 'dd/mm/yyyy'
+			});
+			console.log($('#datemask').val())
+	</script>
+	
 </body>
 </html>
 

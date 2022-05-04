@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.demo.DTO.TransactionDTO;
 
 import lombok.Data;
@@ -21,11 +23,9 @@ public class Transaction {
 	
 	private Double value;
 	private String description;
-	private Date time;
 	
-	@ManyToOne
-	@JoinColumn(name = "type_id")
-	private TransactionType type;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date time;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -39,20 +39,19 @@ public class Transaction {
 	@JoinColumn(name = "category_id")
 	private Category category;
 
-	public Transaction(Double value, String description, Date time, TransactionType type, User user, Wallet wallet,
+	public Transaction(Double value, String description, Date time, User user, Wallet wallet,
 			Category category) {
 		super();
 		this.value = value;
 		this.description = description;
 		this.time = time;
-		this.type = type;
 		this.user = user;
 		this.wallet = wallet;
 		this.category = category;
 	}
 	
 	public TransactionDTO toDTO () {
-		return new TransactionDTO(id, value, description, time, type.toDTO(), user.toDTO(), wallet.toDTo(), category.toDTO());
+		return new TransactionDTO(id, value, description, time, user.toDTO(), wallet.toDTo(), category.toDTO());
 	}
 
 }
