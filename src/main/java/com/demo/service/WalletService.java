@@ -60,4 +60,9 @@ public class WalletService implements WalletServiceImpl{
 		walletRepository.delete(wallet);
 	}
 
+	@Override
+	public Wallet getWalletByName(String name) {
+		return walletRepository.findByName(name);
+	}
+
 }

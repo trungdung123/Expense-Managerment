@@ -235,7 +235,6 @@
                                             <th>ID</th>
                                             <th>Người giao dịch</th>
                                             <th>Ví giao dịch</th>
-                                            <th>Kiểu giao dịch</th>
                                             <th>Loại giao dịch</th>
                                             <th>Giá trị</th>
                                             <th>Ngày giao dịch</th>
@@ -248,11 +247,9 @@
                                             <td th:text="${transactionDTO.id}"></td>
                                             <td th:text="${transactionDTO.userDTO.username}"></td>
                                             <td th:text="${transactionDTO.walletDTO.name}"></td>
-                                            <td th:if="${transactionDTO.typeDTO.name} == 'TRANSACTION_IN'">Khoản thu</td>
-                                            <td th:unless="${transactionDTO.typeDTO.name} == 'TRANSACTION_IN'">Khoản chi</td>
-                                            <td th:text="${transactionDTO.categoryDTO.name}"></td>
-                                            <td th:text="${transactionDTO.value}"></td>
-                                            <td th:text="${transactionDTO.time}"></td>
+                                           <td th:text="${transactionDTO.categoryDTO.name}"></td>
+                                            <td th:text="${#numbers.formatDecimal(transactionDTO.value, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></td>
+                                            <td th:text="${#dates.format(transactionDTO.time, 'dd/MM/yyyy')}"></td>
                                             <td th:text="${transactionDTO.description}"></td>
                                         	<td>
                                         		<a th:href="@{/admin/transactions/edit-transaction/{id}(id=${transactionDTO.id})}" class="btn btn-success">Chỉnh sửa</a>

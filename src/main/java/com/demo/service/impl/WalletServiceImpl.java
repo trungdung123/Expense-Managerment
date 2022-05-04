@@ -10,6 +10,8 @@ public interface WalletServiceImpl {
 	
 	Wallet getWalletById(Long id);
 	
+	Wallet getWalletByName(String name);
+	
 	Wallet createWallet (Wallet wallet);
 	
 	Wallet editWallet (Wallet wallet, Long id);

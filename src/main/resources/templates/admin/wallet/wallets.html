@@ -238,7 +238,7 @@
 										<tr th:each="walletDTO : ${walletDTOs}">
 											<td th:text="${walletDTO.id}"></td>
 											<td th:text="${walletDTO.name}"></td>
-											<td th:text="${walletDTO.balance}"></td>
+											<td th:text="${#numbers.formatDecimal(walletDTO.balance, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></td>
 											<td th:text="${walletDTO.userDTO.username}"></td>
 											<td><a
 												th:href="@{/admin/wallets/edit-wallet/{id}(id=${walletDTO.id})}"

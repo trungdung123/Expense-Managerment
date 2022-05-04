@@ -6,4 +6,6 @@ import com.demo.models.Wallet;
 
 public interface WalletRepository extends JpaRepository<Wallet, Long>{
 
+	Wallet findByName(String name);
+	
 }
