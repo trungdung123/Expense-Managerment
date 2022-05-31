@@ -53,6 +53,8 @@
 					href="#" role="button"><i class="fas fa-bars"></i></a></li>
 				<li class="nav-item d-none d-sm-inline-block"><a
 					th:href="@{/admin}" class="nav-link">Trang chủ</a></li>
+				<li class="nav-item d-none d-sm-inline-block"><a
+					th:href="@{/logout}" class="nav-link">Logout</a></li>
 			</ul>
 
 
@@ -217,7 +219,8 @@
 					</div>
 					<!-- /.card-header -->
 					<!-- form start -->
-					<form th:action="@{/admin/transactions/edit-transaction/{id}(id=${transactionDTO.id})}"
+					<form
+						th:action="@{/admin/transactions/edit-transaction/{id}(id=${transactionDTO.id})}"
 						method="post" th:object="${transactionDTO}">
 						<div class="card-body">
 
@@ -258,7 +261,7 @@
 							</div>
 
 							<div class="form-group">
-								<label>Transaction Date</label> 
+								<label>Transaction Date</label>
 								<div class="input-group">
 									<div class="input-group-prepend">
 										<span class="input-group-text"><i

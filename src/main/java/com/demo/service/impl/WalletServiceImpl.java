@@ -2,11 +2,14 @@ package com.demo.service.impl;
 
 import java.util.List;
 
+import com.demo.models.User;
 import com.demo.models.Wallet;
 
 public interface WalletServiceImpl {
 
 	List<Wallet> getAllWallet ();
+	
+	List<Wallet> getByUser (User user);
 	
 	Wallet getWalletById(Long id);
 	

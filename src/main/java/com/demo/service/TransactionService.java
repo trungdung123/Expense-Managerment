@@ -45,7 +45,10 @@ public class TransactionService implements TransactionServiceImpl {
 	public Transaction createTransaction(Transaction Transaction) {
 
 		User user = userRepository.findByUsername(Transaction.getUser().getUsername());
-		Wallet wallet = walletRepository.findByName(Transaction.getWallet().getName());
+
+		Wallet wallet = walletRepository.findByUser(user).stream()
+				.filter(e -> e.getName().equals(Transaction.getWallet().getName())).findAny().orElse(null);
+
 		Category category = categoryRepository.findByName(Transaction.getCategory().getName());
 
 		if (category.getType().getName().equals(ECategory.CATEGORY_IN))
@@ -66,23 +69,26 @@ public class TransactionService implements TransactionServiceImpl {
 		Transaction TransactionInDB = TransactionRepository.findById(id).get();
 		Wallet walletInDB = TransactionInDB.getWallet();
 		Category categoryInDB = TransactionInDB.getCategory();
-		
+
 		if (categoryInDB.getType().getName().equals(ECategory.CATEGORY_IN))
 			walletInDB.setBalance(walletInDB.getBalance() - TransactionInDB.getValue());
 		else
 			walletInDB.setBalance(walletInDB.getBalance() + TransactionInDB.getValue());
-		
+
 		walletRepository.save(walletInDB);
-		
+
 		User user = userRepository.findByUsername(Transaction.getUser().getUsername());
-		Wallet wallet = walletRepository.findByName(Transaction.getWallet().getName());
+
+		Wallet wallet = walletRepository.findByUser(user).stream()
+				.filter(e -> e.getName().equals(Transaction.getWallet().getName())).findAny().orElse(null);
+
 		Category category = categoryRepository.findByName(Transaction.getCategory().getName());
 
 		if (category.getType().getName().equals(ECategory.CATEGORY_IN))
 			wallet.setBalance(wallet.getBalance() + Transaction.getValue());
 		else
 			wallet.setBalance(wallet.getBalance() - Transaction.getValue());
-		
+
 		walletRepository.save(wallet);
 
 		TransactionInDB.setCategory(category);
@@ -100,7 +106,10 @@ public class TransactionService implements TransactionServiceImpl {
 	@Override
 	public void deleteTransaction(Transaction Transaction) {
 
-		Wallet wallet = walletRepository.findByName(Transaction.getWallet().getName());
+		Wallet wallet = walletRepository.findByUser(Transaction.getUser()).stream()
+				.filter(e -> e.getName().equals(Transaction.getWallet().getName()))
+				.findAny()
+				.orElse(null);
 
 		Category category = categoryRepository.findByName(Transaction.getCategory().getName());
 
@@ -108,10 +117,15 @@ public class TransactionService implements TransactionServiceImpl {
 			wallet.setBalance(wallet.getBalance() - Transaction.getValue());
 		else
 			wallet.setBalance(wallet.getBalance() + Transaction.getValue());
-		
+
 		walletRepository.save(wallet);
 
 		TransactionRepository.delete(Transaction);
+	}
+
+	@Override
+	public List<Transaction> getTransactionByUser(User user) {
+		return TransactionRepository.findByUser(user);
 	}
 
 }

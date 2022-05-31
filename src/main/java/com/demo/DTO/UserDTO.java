@@ -20,7 +20,7 @@ public class UserDTO {
 	private String full_name;
 	private String phone;
 
-	private RoleDTO role;
+	private RoleDTO roleDTO;
 	
 	public UserDTO(Long id, String username, String password, String email, String full_name, String phone,
 			RoleDTO role) {
@@ -31,11 +31,11 @@ public class UserDTO {
 		this.email = email;
 		this.full_name = full_name;
 		this.phone = phone;
-		this.role = role;
+		this.roleDTO = role;
 	}
 	
 	public User toModel () {
-		return new User(username, password, full_name, email, phone, role.toModel());
+		return new User(username, password, full_name, email, phone, roleDTO.toModel());
 	}
 
 

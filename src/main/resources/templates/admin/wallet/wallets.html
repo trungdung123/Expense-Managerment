@@ -53,6 +53,8 @@
 					href="#" role="button"><i class="fas fa-bars"></i></a></li>
 				<li class="nav-item d-none d-sm-inline-block"><a
 					th:href="@{/admin}" class="nav-link">Trang chủ</a></li>
+				<li class="nav-item d-none d-sm-inline-block"><a
+					th:href="@{/logout}" class="nav-link">Logout</a></li>
 			</ul>
 
 
@@ -150,8 +152,8 @@
 										<p>Danh sách</p>
 								</a></li>
 								<li class="nav-item"><a
-									th:href="@{/admin/categories/add-category}"
-									class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									th:href="@{/admin/categories/add-category}" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
 										<p>Thêm mới</p>
 								</a></li>
 							</ul></li>
@@ -215,7 +217,7 @@
 					<div class="col-12">
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">Danh sách tài khoản</h3>
+								<h3 class="card-title">Danh sách ví</h3>
 
 								<div class="card-tools">
 									<a th:href="@{/admin/wallets/add-wallet}" class="btn btn-info">Thêm
@@ -238,7 +240,8 @@
 										<tr th:each="walletDTO : ${walletDTOs}">
 											<td th:text="${walletDTO.id}"></td>
 											<td th:text="${walletDTO.name}"></td>
-											<td th:text="${#numbers.formatDecimal(walletDTO.balance, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></td>
+											<td
+												th:text="${#numbers.formatDecimal(walletDTO.balance, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></td>
 											<td th:text="${walletDTO.userDTO.username}"></td>
 											<td><a
 												th:href="@{/admin/wallets/edit-wallet/{id}(id=${walletDTO.id})}"
