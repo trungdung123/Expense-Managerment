@@ -65,4 +65,9 @@ public class WalletService implements WalletServiceImpl{
 		return walletRepository.findByName(name);
 	}
 
+	@Override
+	public List<Wallet> getByUser(User user) {
+		return walletRepository.findByUser(user);
+	}
+
 }

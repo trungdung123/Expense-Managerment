@@ -33,9 +33,10 @@
 <!-- summernote -->
 <link rel="stylesheet"
 	href="/admin/plugins/summernote/summernote-bs4.min.css">
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
@@ -56,6 +57,8 @@
 					href="#" role="button"><i class="fas fa-bars"></i></a></li>
 				<li class="nav-item d-none d-sm-inline-block"><a
 					th:href="@{/admin}" class="nav-link">Trang chủ</a></li>
+				<li class="nav-item d-none d-sm-inline-block"><a
+					th:href="@{/logout}" class="nav-link">Logout</a></li>
 			</ul>
 
 
@@ -225,14 +228,6 @@
 						<div class="card-body">
 
 							<div class="form-group">
-								<label>User's</label> <select th:field="*{userDTO.username}"
-									class="form-control">
-									<option th:each="userDTO : ${userDTOs}"
-										th:value="${userDTO.username}" th:text="${userDTO.username}"></option>
-								</select>
-							</div>
-
-							<div class="form-group">
 								<label>Wallet</label> <select th:field="*{walletDTO.name}"
 									class="form-control">
 									<option th:each="walletDTO : ${walletDTOs}"
@@ -338,15 +333,15 @@
 	<script src="/admin/dist/js/demo.js"></script>
 	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 	<script src="/admin/dist/js/pages/dashboard.js"></script>
-	
+
 	<script type="text/javascript">
-			//Datemask dd/mm/yyyy
-			$('#datemask').inputmask('dd/mm/yyyy', {
-				'placeholder' : 'dd/mm/yyyy'
-			});
-			console.log($('#datemask').val())
+		//Datemask dd/mm/yyyy
+		$('#datemask').inputmask('dd/mm/yyyy', {
+			'placeholder' : 'dd/mm/yyyy'
+		});
+		console.log($('#datemask').val())
 	</script>
-	
+
 </body>
 </html>
 

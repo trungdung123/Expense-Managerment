@@ -53,6 +53,8 @@
 					href="#" role="button"><i class="fas fa-bars"></i></a></li>
 				<li class="nav-item d-none d-sm-inline-block"><a
 					th:href="@{/admin}" class="nav-link">Trang chủ</a></li>
+				<li class="nav-item d-none d-sm-inline-block"><a
+					th:href="@{/logout}" class="nav-link">Logout</a></li>
 			</ul>
 
 
@@ -150,8 +152,8 @@
 										<p>Danh sách</p>
 								</a></li>
 								<li class="nav-item"><a
-									th:href="@{/admin/categories/add-category}"
-									class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									th:href="@{/admin/categories/add-category}" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
 										<p>Thêm mới</p>
 								</a></li>
 							</ul></li>
@@ -217,8 +219,8 @@
 					</div>
 					<!-- /.card-header -->
 					<!-- form start -->
-					<form th:action="@{/admin/users/edit-user/{id}(id=${userDTO.id})}" method="post"
-						th:object="${userDTO}">
+					<form th:action="@{/admin/users/edit-user/{id}(id=${userDTO.id})}"
+						method="post" th:object="${userDTO}">
 						<div class="card-body">
 							<div class="form-group">
 								<label for="exampleInputEmail1">Username</label> <input
@@ -251,7 +253,7 @@
 							</div>
 
 							<div class="form-group">
-								<label>Role</label> <select th:field="*{role.name}"
+								<label>Role</label> <select th:field="*{roleDTO.name}"
 									class="form-control">
 									<option th:value="ROLE_ADMIN" th:text="ADMIN"></option>
 									<option th:value="ROLE_USER" th:text="USER"></option>
